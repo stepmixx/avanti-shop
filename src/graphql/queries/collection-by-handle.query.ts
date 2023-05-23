@@ -10,7 +10,12 @@ export const COLLECTION_BY_HANDLE_QUERY = gql`
         url
       }
       products(first: $first, after: $after) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+        }
         edges {
+          cursor
           node {
             title
             images(first: 1) {
