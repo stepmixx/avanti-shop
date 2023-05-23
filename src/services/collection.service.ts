@@ -12,11 +12,17 @@ class CollectionService {
     return collections;
   }
 
-  static async getCollectionByHandle(handle: string) {
+  static async getCollectionByHandle(
+    handle: string,
+    first: number,
+    after?: string
+  ) {
     const collectionByHandle = await graphQLClient.request(
       COLLECTION_BY_HANDLE_QUERY,
       {
         handle,
+        first,
+        after,
       }
     );
 
