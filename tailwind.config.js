@@ -11,7 +11,7 @@ module.exports = withMT({
   theme: {
     ...defaultTheme,
     fontFamily: {
-      sans: ["--font-montserrat", ...defaultTheme.fontFamily.sans],
+      sans: ["var(--font-montserrat)", ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [],
