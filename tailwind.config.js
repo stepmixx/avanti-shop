@@ -9,6 +9,7 @@ module.exports = withMT({
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    ...defaultTheme,
     fontFamily: {
       sans: ["--font-montserrat", ...defaultTheme.fontFamily.sans],
     },
