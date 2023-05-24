@@ -11,7 +11,7 @@ function ProductCard(props: ProductCardProps) {
   const { product, size = 256 } = props;
 
   return (
-    <Link href={`/product/${product.handle}`}>
+    <Link href={`/products/${product.handle}`}>
       <div
         style={{ width: size, height: size + 64 }}
         className={`grid grid-rows-[1fr_64px] shadow rounded-sm`}
