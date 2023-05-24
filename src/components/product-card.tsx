@@ -17,11 +17,7 @@ function ProductCard(props: ProductCardProps) {
         className={`grid grid-rows-[1fr_64px] shadow rounded-sm`}
       >
         <div className="relative w-full h-full">
-          <Image
-            src={product.featuredImage.url}
-            alt={product.featuredImage.altText}
-            fill
-          />
+          <Image src={product.featuredImage.url} alt={product.title} fill />
         </div>
         <div className="w-full h-16 px-3 flex items-center justify-between">
           <Typography variant="h6">{product.title}</Typography>
