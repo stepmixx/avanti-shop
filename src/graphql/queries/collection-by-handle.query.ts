@@ -4,6 +4,7 @@ export const COLLECTION_BY_HANDLE_QUERY = gql`
   query collectionByHandle($handle: String!, $first: Int!, $after: String) {
     collection(handle: $handle) {
       title
+      handle
       description
       image {
         id
@@ -18,12 +19,11 @@ export const COLLECTION_BY_HANDLE_QUERY = gql`
           cursor
           node {
             title
-            images(first: 1) {
-              edges {
-                node {
-                  url
-                }
-              }
+            handle
+            featuredImage {
+              id
+              url
+              altText
             }
             variants(first: 1) {
               edges {

@@ -11,6 +11,7 @@ export const PRODUCTS_QUERY = gql`
         cursor
         node {
           title
+          handle
           description
           images(first: 1) {
             edges {
