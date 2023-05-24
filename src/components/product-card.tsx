@@ -23,7 +23,7 @@ function ProductCard(props: ProductCardProps) {
           <Typography variant="h6">{product.title}</Typography>
           <Typography
             variant="h6"
-            className="font-bold"
+            className="font-bold text-right"
           >{`${product.price.amount} ${product.price.currencyCode}`}</Typography>
         </div>
       </div>
