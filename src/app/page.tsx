@@ -18,11 +18,11 @@ export default async function Home() {
 
   return (
     <Suspense fallback={<FullPageLoader />}>
-      <div className="flex min-h-screen flex-col items-center p-8">
+      <div className="w-full flex min-h-screen flex-col items-center p-8">
         <Typography variant="h2" className="font-bold uppercase">
           {collection.title}
         </Typography>
-        <div className="w-[min(100%,600px)] xl:w-full flex justify-center sm:justify-between flex-wrap my-8 gap-6">
+        <div className="w-[min(100%,600px)] xl:w-full flex justify-center flex-wrap my-8 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
           {collection.products.data.map((product: any) => (
             <ProductCard key={product.id} product={product} />
           ))}
