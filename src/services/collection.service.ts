@@ -1,14 +1,19 @@
 import graphQLClient from "@/graphql";
 import { COLLECTION_BY_HANDLE_QUERY } from "@/graphql/queries/collection-by-handle.query";
 import { COLLECTIONS_QUERY } from "@/graphql/queries/collections.query";
-import { removeEdgesAndNodes } from "@/helpers/utils";
+import {
+  removeEdgesAndNodes,
+  removeEdgesAndNodesWithPagination,
+} from "@/helpers/utils";
 
 class CollectionService {
   static async getCollections() {
-    const collections = await graphQLClient.request(COLLECTIONS_QUERY, {
+    const response = (await graphQLClient.request(COLLECTIONS_QUERY, {
       first: 10,
       after: null,
-    });
+    })) as any;
+
+    const collections = removeEdgesAndNodes(response.collections);
 
     return collections;
   }
@@ -25,8 +30,10 @@ class CollectionService {
     })) as any;
 
     const collection = response.collection;
-    collection.products = removeEdgesAndNodes(collection.products);
-    collection.products.forEach((product: any) => {
+    collection.products = removeEdgesAndNodesWithPagination(
+      collection.products
+    );
+    collection.products.data.forEach((product: any) => {
       product.price = product.variants.edges[0].node.price;
       delete product.variants;
     });
