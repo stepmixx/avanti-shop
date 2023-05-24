@@ -30,7 +30,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 grid grid-cols-3 items-center px-4 sm:px-6 lg:px-8 bg-black text-white w-full h-16 shadow-md">
+      <nav className="fixed top-0 left-0 z-[100] grid grid-cols-3 items-center px-4 sm:px-6 lg:px-8 bg-black text-white w-full h-16 shadow-md">
         <IconButton
           variant="text"
           color="gray"
