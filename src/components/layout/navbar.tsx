@@ -42,11 +42,13 @@ function Navbar() {
         </IconButton>
         <div className="hidden lg:block">
           <ul className="flex gap-1">
-            {ROUTES.map(({ title }) => (
+            {ROUTES.map(({ title, path }) => (
               <li key={title}>
-                <Button variant="text" color="white" className="p-2">
-                  <p className="capitalize text-lg font-thin">{title}</p>
-                </Button>
+                <Link href={path}>
+                  <Button variant="text" color="white" className="p-2">
+                    <p className="capitalize text-lg font-thin">{title}</p>
+                  </Button>
+                </Link>
               </li>
             ))}
           </ul>
