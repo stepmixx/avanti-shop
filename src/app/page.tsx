@@ -5,6 +5,11 @@ import ProductCard from "@/components/product-card";
 import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
 
+export const metadata = {
+  title: "Take Home | AVANTI",
+  description: "Take home assignment for Avanti",
+};
+
 export default async function Home() {
   const collection = (await CollectionService.getCollectionByHandle(
     "featured",
@@ -18,7 +23,7 @@ export default async function Home() {
           {collection.title}
         </Typography>
         <div className="w-[min(100%,600px)] xl:w-full flex justify-center sm:justify-between flex-wrap my-8 gap-6">
-          {collection.products.map((product: any) => (
+          {collection.products.data.map((product: any) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
