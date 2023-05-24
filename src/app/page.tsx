@@ -2,6 +2,8 @@ import Image from "next/image";
 import CollectionService from "@/services/collection.service";
 import { Button, Typography } from "@/components/material-tailwind";
 import ProductCard from "@/components/product-card";
+import { Suspense } from "react";
+import { FullPageLoader } from "@/components/circular-loader.component";
 
 export default async function Home() {
   const collection = (await CollectionService.getCollectionByHandle(
@@ -10,18 +12,20 @@ export default async function Home() {
   )) as any;
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <Typography variant="h2" className="font-bold uppercase">
-        {collection.title}
-      </Typography>
-      <div className="w-full flex justify-between flex-wrap my-8 px-16">
-        {collection.products.map((product: any) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <Suspense fallback={<FullPageLoader />}>
+      <div className="flex min-h-screen flex-col items-center">
+        <Typography variant="h2" className="font-bold uppercase">
+          {collection.title}
+        </Typography>
+        <div className="w-[min(100%,600px)] xl:w-full flex justify-between flex-wrap my-8 gap-6">
+          {collection.products.map((product: any) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        <Button variant="filled" className="bg-black text-white normal-case">
+          See more
+        </Button>
       </div>
-      <Button variant="filled" className="bg-black text-white normal-case">
-        See more
-      </Button>
-    </main>
+    </Suspense>
   );
 }
