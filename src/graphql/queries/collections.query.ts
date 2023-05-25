@@ -1,11 +1,13 @@
 import { gql } from "graphql-request";
 
 export const COLLECTIONS_QUERY = gql`
-  query collections($first: Int!, $after: String) {
-    collections(first: $first, after: $after) {
+  query collections($first: Int, $after: String, $last: Int, $before: String) {
+    collections(first: $first, after: $after, last: $last, before: $before) {
       pageInfo {
         hasNextPage
         hasPreviousPage
+        startCursor
+        endCursor
       }
       edges {
         cursor
