@@ -57,7 +57,7 @@ function Navbar() {
             ))}
           </ul>
         </div>
-        <Link href="/" className="mx-auto">
+        <Link id="logo" href="/" className="mx-auto">
           <Image src="/AVANTI.svg" alt="Avanti logo" height={48} width={96} />
         </Link>
         <div className="flex gap-1 sm:gap-4 items-center ml-auto">
