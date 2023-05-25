@@ -10,13 +10,17 @@ import {
   IconUserCircle,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import SearchDialog from "../search-dialog";
 
 function Navbar() {
   const [sidenavOpen, setSidenavOpen] = React.useState(false);
+  const [searchDialogOpen, setSearchDialogOpen] = React.useState(false);
 
   const toggleSidenav = () => setSidenavOpen((prev) => !prev);
-
   const closeSidenav = () => setSidenavOpen(false);
+
+  const toggleSearchDialog = () => setSearchDialogOpen((prev) => !prev);
+  const closeSearchDialog = () => setSearchDialogOpen(false);
 
   const ROUTES = [
     {
@@ -60,7 +64,7 @@ function Navbar() {
           <IconButton
             color="gray"
             variant="text"
-            onClick={() => alert("Buscar")}
+            onClick={toggleSearchDialog}
             className="w-8 sm:w-10 h-8 sm:h-10"
           >
             <IconSearch className="w-5 sm:w-6 text-white" />
@@ -84,6 +88,7 @@ function Navbar() {
         </div>
       </nav>
       <Sidenav routes={ROUTES} open={sidenavOpen} onClose={closeSidenav} />
+      <SearchDialog open={searchDialogOpen} onClose={closeSearchDialog} />
     </>
   );
 }
