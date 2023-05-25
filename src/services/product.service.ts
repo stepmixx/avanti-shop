@@ -4,9 +4,16 @@ import { PRODUCTS_QUERY } from "@/graphql/queries/products.query";
 import { removeEdgesAndNodes } from "@/helpers/utils";
 
 class ProductService {
-  static async getProducts(first: number, after: string, query: string) {
+  static async getProducts(
+    query: string,
+    first: number | null,
+    after?: string | null,
+    last?: number | null,
+    before?: string | null
+  ) {
     const products = await graphQLClient.request(PRODUCTS_QUERY, {
       first,
+      before,
       after,
       query,
     });
