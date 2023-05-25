@@ -14,10 +14,9 @@ export const removeEdgesAndNodes = (array: any) => {
   return array.edges.map((edge: any) => edge?.node);
 };
 
-export const removeEdgesAndNodesWithPagination = (array: any) => {
-  const data = array.edges.map((edge: any) => edge.node);
+export const removeNodesForPagination = (array: any) => {
+  const edges = array.edges.map((edge: any) => edge.node);
   const pageInfo = array.pageInfo;
-  const cursor = array.edges[array.edges.length - 1].cursor;
 
-  return { data, pageInfo, cursor };
+  return { edges, pageInfo };
 };
