@@ -1,7 +1,7 @@
 import graphQLClient from "@/graphql";
 import { PRODUCT_BY_HANDLE_QUERY } from "@/graphql/queries/product-by-handle.query";
 import { PRODUCTS_QUERY } from "@/graphql/queries/products.query";
-import { removeEdgesAndNodes } from "@/helpers/utils";
+import { removeEdgesAndNodes, removeNodesForPagination } from "@/helpers/utils";
 
 class ProductService {
   static async getProducts(
@@ -11,11 +11,18 @@ class ProductService {
     last?: number | null,
     before?: string | null
   ) {
-    const products = await graphQLClient.request(PRODUCTS_QUERY, {
-      first,
-      before,
-      after,
+    const response = (await graphQLClient.request(PRODUCTS_QUERY, {
       query,
+      first,
+      after,
+      before,
+      last,
+    })) as any;
+
+    const products = removeNodesForPagination(response.products);
+    products.edges.forEach((product: any) => {
+      product.price = product.variants.edges[0].node.price;
+      delete product.variants;
     });
 
     return products;
