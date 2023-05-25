@@ -1,6 +1,5 @@
-import CollectionService from "@/services/collection.service";
+import CollectionService, { PAGE_SIZES } from "@/services/collection.service";
 import { IconButton, Typography } from "@/components/material-tailwind";
-import Image from "next/image";
 import ProductCard from "@/components/product-card";
 import {
   IconArrowBigLeftFilled,
@@ -9,6 +8,7 @@ import {
 import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
 import Link from "next/link";
+import { createUrl } from "@/helpers/utils";
 
 export async function generateMetadata({
   params: { handle },
@@ -25,28 +25,45 @@ export async function generateMetadata({
   };
 }
 
-async function Collection({ params }: { params: { handle: string } }) {
-  const paramValues = params.handle as any;
-  const collection =
-    typeof paramValues === "string"
-      ? ((await CollectionService.getCollectionByHandle(
-          paramValues,
-          4,
-          null
-        )) as any)
-      : Array.isArray(paramValues)
-      ? ((await CollectionService.getCollectionByHandle(
-          paramValues[0],
-          4,
-          decodeURIComponent(paramValues[1])
-        )) as any)
-      : ((await CollectionService.getCollectionByHandle(
-          paramValues[0],
-          null,
-          null,
-          4,
-          decodeURIComponent(paramValues[1])
-        )) as any);
+async function Collection({
+  params,
+  searchParams,
+}: {
+  params: { handle: string };
+  searchParams: { [key: string]: string };
+}) {
+  const [handle] = params.handle as any;
+  const newParams = new URLSearchParams(searchParams);
+  const collection = !newParams.has("cursor")
+    ? ((await CollectionService.getCollectionByHandle(
+        handle,
+        PAGE_SIZES.GRID,
+        null
+      )) as any)
+    : !newParams.has("direction")
+    ? ((await CollectionService.getCollectionByHandle(
+        handle,
+        PAGE_SIZES.GRID,
+        newParams.get("cursor")
+      )) as any)
+    : ((await CollectionService.getCollectionByHandle(
+        handle,
+        null,
+        null,
+        PAGE_SIZES.GRID,
+        newParams.get("cursor")
+      )) as any);
+
+  const createRedirectUrl = (cursor: string, direction = false) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("cursor", cursor);
+    if (direction) {
+      newParams.set("direction", "prev");
+    } else {
+      newParams.delete("direction");
+    }
+    return createUrl(`/collections/${handle}`, newParams);
+  };
 
   const {
     products: {
@@ -69,7 +86,7 @@ async function Collection({ params }: { params: { handle: string } }) {
         ))}
         <div className="w-full flex justify-between mt-12 col-[1_/_-1]">
           <div className="flex gap-4 items-center">
-            <Link href={`/collections/${paramValues}/${startCursor}/p`}>
+            <Link href={createRedirectUrl(startCursor, true)}>
               <IconButton
                 variant="filled"
                 className="bg-black"
@@ -86,7 +103,7 @@ async function Collection({ params }: { params: { handle: string } }) {
             <Typography variant="paragraph" className="hidden sm:block">
               Next page
             </Typography>
-            <Link href={`/collections/${paramValues}/${endCursor}`}>
+            <Link href={createRedirectUrl(endCursor)}>
               <IconButton
                 variant="filled"
                 className="bg-black"
