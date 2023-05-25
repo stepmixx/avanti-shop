@@ -23,7 +23,10 @@ function ProductCard(props: ProductCardProps) {
         <Image src={product.featuredImage.url} alt={product.title} fill />
       </div>
       <div className="w-full h-16">
-        <Typography className="text-center font-bold" variant="h6">
+        <Typography
+          className="relative top-1 text-center font-bold"
+          variant="h6"
+        >
           {product.title}
         </Typography>
         <div className="flex px-4 items-center justify-between">
