@@ -2,8 +2,11 @@ import graphQLClient from "@/graphql";
 import { COLLECTION_BY_HANDLE_QUERY } from "@/graphql/queries/collection-by-handle.query";
 import { COLLECTIONS_QUERY } from "@/graphql/queries/collections.query";
 import { removeEdgesAndNodes, removeNodesForPagination } from "@/helpers/utils";
-import { Arapey } from "next/font/google";
 
+export const PAGE_SIZES = {
+  HOME: 4,
+  GRID: 12,
+};
 class CollectionService {
   static async getCollections() {
     const response = (await graphQLClient.request(COLLECTIONS_QUERY, {
