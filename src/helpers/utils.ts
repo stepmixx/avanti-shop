@@ -20,3 +20,6 @@ export const removeNodesForPagination = (array: any) => {
 
   return { edges, pageInfo };
 };
+export const capitalize = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
