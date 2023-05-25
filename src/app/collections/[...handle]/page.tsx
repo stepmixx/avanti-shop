@@ -74,46 +74,56 @@ async function Collection({
 
   return (
     <Suspense fallback={<FullPageLoader />}>
-      <div className="mx-auto w-full h-full grid grid-cols-[repeat(auto-fill,300px)] justify-center gap-6 mb-4 p-8 sm:p-12 md:p-14 lg:p-16">
+      <div
+        id="products-grid"
+        className="mx-auto w-full h-full grid grid-cols-[repeat(auto-fill,300px)] justify-center gap-6 mb-4 p-8 sm:p-12 md:p-14 lg:p-16"
+      >
         <Typography
           variant="h1"
           className="flex justify-center sm:justify-start text-4xl sm:text-5xl h-12 sm:h-16 uppercase text-center sm:text-left col-[1_/_-1]"
         >
           <span>{collection.title}</span>
         </Typography>
-        {edges.map((product: any) => (
-          <ProductCard size={300} key={product.id} product={product} />
+        {edges.map((product: any, index: number) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            size={300}
+            index={index}
+          />
         ))}
-        <div className="w-full flex justify-between mt-12 col-[1_/_-1]">
-          <div className="flex gap-4 items-center">
-            <Link href={createRedirectUrl(startCursor, true)}>
-              <IconButton
-                variant="filled"
-                className="bg-black"
-                disabled={!hasPreviousPage}
-              >
-                <IconArrowBigLeftFilled className="text-white" />
-              </IconButton>
-            </Link>
-            <Typography variant="paragraph" className="hidden sm:block">
-              Previous page
-            </Typography>
+        {(hasPreviousPage || hasNextPage) && (
+          <div className="w-full flex justify-between mt-12 col-[1_/_-1]">
+            <div className="flex gap-4 items-center">
+              <Link href={createRedirectUrl(startCursor, true)}>
+                <IconButton
+                  variant="filled"
+                  className="bg-black"
+                  disabled={!hasPreviousPage}
+                >
+                  <IconArrowBigLeftFilled className="text-white" />
+                </IconButton>
+              </Link>
+              <Typography variant="paragraph" className="hidden sm:block">
+                Previous page
+              </Typography>
+            </div>
+            <div className="flex gap-4 items-center">
+              <Typography variant="paragraph" className="hidden sm:block">
+                Next page
+              </Typography>
+              <Link href={createRedirectUrl(endCursor)}>
+                <IconButton
+                  variant="filled"
+                  className="bg-black"
+                  disabled={!hasNextPage}
+                >
+                  <IconArrowBigRightFilled className="text-white" />
+                </IconButton>
+              </Link>
+            </div>
           </div>
-          <div className="flex gap-4 items-center">
-            <Typography variant="paragraph" className="hidden sm:block">
-              Next page
-            </Typography>
-            <Link href={createRedirectUrl(endCursor)}>
-              <IconButton
-                variant="filled"
-                className="bg-black"
-                disabled={!hasNextPage}
-              >
-                <IconArrowBigRightFilled className="text-white" />
-              </IconButton>
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
     </Suspense>
   );
