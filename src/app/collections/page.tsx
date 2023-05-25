@@ -1,7 +1,9 @@
+import { FullPageLoader } from "@/components/circular-loader.component";
 import { Typography } from "@/components/material-tailwind";
 import CollectionService from "@/services/collection.service";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Collections | AVANTI",
@@ -13,30 +15,32 @@ async function Collections() {
   const collections = await CollectionService.getCollections();
 
   return (
-    <div className="w-full flex flex-wrap justify-center gap-6 py-8 sm:py-12 sm:px-8 md:px-12 lg:px-16 mb-4">
-      <Typography
-        variant="h1"
-        className="text-4xl sm:text-5xl h-12 sm:h-16 uppercase text-center sm:text-left basis-full"
-      >
-        Collections
-      </Typography>
-      {collections.map((collection: any) => (
-        <Link href={`/collections/${collection.handle}`} key={collection.id}>
-          <div className="relative w-[300px] aspect-square grid place-items-center shadow">
-            <Image
-              src={collection.image.url}
-              alt={collection.title}
-              fill
-              className="rounded-lg"
-            />
-            <div className="absolute w-full h-full bg-white opacity-30 rounded-md" />
-            <Typography variant="h3" className="font-bold z-10">
-              {collection.title}
-            </Typography>
-          </div>
-        </Link>
-      ))}
-    </div>
+    <Suspense fallback={<FullPageLoader />}>
+      <div className="mx-auto w-full grid grid-cols-[repeat(auto-fill,300px)] grid-rows-[64px_repeat(auto-fill,1fr)]  justify-center gap-6 p-8 sm:p-12 md:p-14 lg:p-16 mb-4">
+        <Typography
+          variant="h1"
+          className="flex justify-center sm:justify-start text-4xl sm:text-5xl h-12 sm:h-16 uppercase text-center sm:text-left col-[1_/_-1]"
+        >
+          <span>Collections</span>
+        </Typography>
+        {collections.map((collection: any) => (
+          <Link href={`/collections/${collection.handle}`} key={collection.id}>
+            <div className="relative w-[300px] aspect-square grid place-items-center shadow">
+              <Image
+                src={collection.image.url}
+                alt={collection.title}
+                fill
+                className="rounded-lg"
+              />
+              <div className="absolute w-full h-full bg-white opacity-30 rounded-md" />
+              <Typography variant="h3" className="font-bold z-10">
+                {collection.title}
+              </Typography>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </Suspense>
   );
 }
 
