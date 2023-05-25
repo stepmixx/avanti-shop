@@ -7,14 +7,16 @@ import { useRouter } from "next/navigation";
 interface ProductCardProps {
   product: any;
   size?: number;
+  index?: number;
 }
 
 function ProductCard(props: ProductCardProps) {
-  const { product, size = 256 } = props;
+  const { product, size = 256, index } = props;
   const router = useRouter();
 
   return (
     <div
+      id={typeof index === "number" ? `product-${index}` : undefined}
       onClick={() => router.push(`/products/${product.handle}`)}
       style={{ width: size, height: size + 64 }}
       className={`grid grid-rows-[1fr_64px] shadow rounded-sm hover:cursor-pointer`}
