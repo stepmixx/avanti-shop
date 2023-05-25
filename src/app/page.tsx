@@ -1,5 +1,4 @@
-import Image from "next/image";
-import CollectionService from "@/services/collection.service";
+import CollectionService, { PAGE_SIZES } from "@/services/collection.service";
 import { Button, Typography } from "@/components/material-tailwind";
 import ProductCard from "@/components/product-card";
 import { Suspense } from "react";
@@ -13,7 +12,7 @@ export const metadata = {
 export default async function Home() {
   const collection = (await CollectionService.getCollectionByHandle(
     "featured",
-    4
+    PAGE_SIZES.HOME
   )) as any;
 
   return (
