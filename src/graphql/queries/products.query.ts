@@ -27,12 +27,9 @@ export const PRODUCTS_QUERY = gql`
           title
           handle
           description
-          images(first: 1) {
-            edges {
-              node {
-                url
-              }
-            }
+          featuredImage {
+            id
+            url
           }
           variants(first: 1) {
             edges {
