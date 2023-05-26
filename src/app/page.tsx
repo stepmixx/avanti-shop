@@ -3,6 +3,7 @@ import { Button, Typography } from "@/components/material-tailwind";
 import ProductCard from "@/components/product-card";
 import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
+import Link from "next/link";
 
 export const metadata = {
   title: "Take Home | AVANTI",
@@ -16,8 +17,8 @@ export default async function Home() {
   )) as any;
 
   return (
-    <Suspense fallback={<FullPageLoader />}>
-      <div className="w-full flex min-h-screen flex-col items-center p-8">
+    <div className="w-full flex min-h-screen flex-col items-center p-8">
+      <Suspense fallback={<FullPageLoader />}>
         <Typography variant="h2" className="font-bold uppercase">
           {collection.title}
         </Typography>
@@ -26,10 +27,12 @@ export default async function Home() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        <Button variant="filled" className="bg-black text-white normal-case">
-          See more
-        </Button>
-      </div>
-    </Suspense>
+        <Link href="/collections/featured">
+          <Button variant="filled" className="bg-black text-white normal-case">
+            See more
+          </Button>
+        </Link>
+      </Suspense>
+    </div>
   );
 }
