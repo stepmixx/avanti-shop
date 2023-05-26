@@ -39,7 +39,7 @@ export default async function Home() {
         </div>
         <a
           href="#featured"
-          className="absolute text-3xl text-white bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 text-background flex flex-col items-center can_hover:cursor-pointer no_hover:animate-pulse can_hover:animate-none can_hover:hover:-translate-y-2 transition ease-in-out duration-500"
+          className="absolute text-3xl text-white bottom-4 left-1/2 -translate-x-1/2 text-background flex flex-col items-center can_hover:cursor-pointer no_hover:animate-pulse can_hover:animate-none can_hover:hover:-translate-y-2 transition ease-in-out duration-500"
         >
           <IconChevronDown />
         </a>
