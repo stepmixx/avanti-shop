@@ -4,6 +4,7 @@ import ProductCard from "@/components/product-card";
 import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
 import Link from "next/link";
+import Image from "next/image";
 
 export const runtime = "edge";
 
@@ -19,21 +20,42 @@ export default async function Home() {
   )) as any;
 
   return (
-    <div className="w-full flex min-h-screen flex-col items-center p-8">
-      <Suspense fallback={<FullPageLoader />}>
-        <Typography variant="h2" className="font-bold uppercase">
-          {collection.title}
+    <div className="w-full h-full flex flex-col items-center">
+      <div className="relative w-full h-[calc(100vh-64px)] flex justify-center">
+        <Typography
+          variant="h1"
+          className="z-10 w-[min(400px,80%)] text-5xl font-bold uppercase text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        >
+          Timeless luxury
         </Typography>
-        <div className="w-[min(100%,600px)] xl:w-full flex justify-center flex-wrap my-8 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-          {collection.products.edges.map((product: any) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="w-full h-full absoulte top-0">
+          <Image
+            src="/banner.webp"
+            alt="banner"
+            fill
+            className="object-cover lg:object-contain"
+          />
         </div>
-        <Link href="/collections/featured">
-          <Button variant="filled" className="bg-black text-white normal-case">
-            See more
-          </Button>
-        </Link>
+      </div>
+      <Suspense fallback={<FullPageLoader />}>
+        <div className="w-full flex flex-col items-center p-8 md:p-16">
+          <Typography variant="h2" className="font-bold uppercase">
+            {collection.title}
+          </Typography>
+          <div className="w-[min(100%,600px)] xl:w-full flex justify-center flex-wrap my-8 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            {collection.products.edges.map((product: any, index: number) => (
+              <ProductCard index={index} key={product.id} product={product} />
+            ))}
+          </div>
+          <Link href="/collections/featured">
+            <Button
+              variant="filled"
+              className="bg-black text-white normal-case"
+            >
+              See more
+            </Button>
+          </Link>
+        </div>
       </Suspense>
     </div>
   );
