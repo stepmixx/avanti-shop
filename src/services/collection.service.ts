@@ -6,6 +6,7 @@ import { removeEdgesAndNodes, removeNodesForPagination } from "@/helpers/utils";
 export const PAGE_SIZES = {
   HOME: 4,
   GRID: 12,
+  SEARCH: 2,
 };
 class CollectionService {
   static async getCollections() {
