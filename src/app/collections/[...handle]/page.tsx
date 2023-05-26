@@ -44,14 +44,14 @@ async function Collection({
     ? ((await CollectionService.getCollectionByHandle(
         handle,
         PAGE_SIZES.GRID,
-        newParams.get("cursor")
+        decodeURIComponent(newParams.get("cursor") as string)
       )) as any)
     : ((await CollectionService.getCollectionByHandle(
         handle,
         null,
         null,
         PAGE_SIZES.GRID,
-        newParams.get("cursor")
+        decodeURIComponent(newParams.get("cursor") as string)
       )) as any);
 
   const createRedirectUrl = (cursor: string, direction = false) => {
