@@ -1,8 +1,12 @@
 name: e2e
 on:
-  schedule:
-    # Runs "at 09:00 and 15:00, Monday through Friday" (see https://crontab.guru)
-    - cron: '0 9,15 * * 1-5'
+  # schedule:
+  #   # Runs "at 09:00 and 15:00, Monday through Friday" (see https://crontab.guru)
+  #   - cron: '0 9,15 * * 1-5'
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
   e2e:
     runs-on: ubuntu-latest
@@ -16,7 +20,7 @@ jobs:
       - name: Set node version
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
       - name: Set pnpm version
         uses: pnpm/action-setup@v2
         with:
@@ -26,7 +30,7 @@ jobs:
         id: node-modules-cache
         uses: actions/cache@v3
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: node-modules-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
@@ -37,7 +41,7 @@ jobs:
         uses: actions/cache@v3
         id: playwright-cache
         with:
-          path: '~/.cache/ms-playwright'
+          path: "~/.cache/ms-playwright"
           key: playwright-cache-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'

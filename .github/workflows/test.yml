@@ -1,5 +1,9 @@
 name: test
-on: pull_request
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,7 +17,7 @@ jobs:
       - name: Set node version
         uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
       - name: Set pnpm version
         uses: pnpm/action-setup@v2
         with:
@@ -23,7 +27,7 @@ jobs:
         id: node-modules-cache
         uses: actions/cache@v3
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: node-modules-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
