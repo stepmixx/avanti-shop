@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { IconError404 } from "@tabler/icons-react";
-import { Button, Typography } from "@/components/material-tailwind";
+import { Typography } from "@/components/material-tailwind";
 
 export const metadata = {
   title: "Page not found | AVANTI",
@@ -20,11 +19,6 @@ const NotFound = () => {
       <Typography varriant="h3" className="text-base text-black">
         The page you are looking for does not exist.
       </Typography>
-      <Link href="/">
-        <Button variant="filled" size="lg" className="mt-8 bg-black">
-          Back to Home
-        </Button>
-      </Link>
     </div>
   );
 };
