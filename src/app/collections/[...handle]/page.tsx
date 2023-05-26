@@ -34,6 +34,7 @@ async function Collection({
 }) {
   const [handle] = params.handle as any;
   const newParams = new URLSearchParams(searchParams);
+  const cursor = decodeURIComponent(newParams.get("cursor") as string);
   const collection = !newParams.has("cursor")
     ? ((await CollectionService.getCollectionByHandle(
         handle,
@@ -44,14 +45,14 @@ async function Collection({
     ? ((await CollectionService.getCollectionByHandle(
         handle,
         PAGE_SIZES.GRID,
-        decodeURIComponent(newParams.get("cursor") as string)
+        cursor
       )) as any)
     : ((await CollectionService.getCollectionByHandle(
         handle,
         null,
         null,
         PAGE_SIZES.GRID,
-        decodeURIComponent(newParams.get("cursor") as string)
+        cursor
       )) as any);
 
   const createRedirectUrl = (cursor: string, direction = false) => {

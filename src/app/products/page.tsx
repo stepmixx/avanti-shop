@@ -36,20 +36,22 @@ async function Products({
   const query = newParams.has("query")
     ? decodeURIComponent(newParams.get("query") as string)
     : "";
+  const cursor = decodeURIComponent(newParams.get("cursor") as string);
+
   const products = !newParams.has("cursor")
     ? ((await ProductService.getProducts(query, PAGE_SIZES.GRID)) as any)
     : !newParams.has("direction")
     ? ((await ProductService.getProducts(
         query,
         PAGE_SIZES.GRID,
-        decodeURIComponent(newParams.get("cursor") as string)
+        cursor
       )) as any)
     : ((await ProductService.getProducts(
         query,
         null,
         null,
         PAGE_SIZES.GRID,
-        decodeURIComponent(newParams.get("cursor") as string)
+        cursor
       )) as any);
 
   const {
