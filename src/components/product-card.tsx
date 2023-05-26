@@ -21,8 +21,21 @@ function ProductCard(props: ProductCardProps) {
       style={{ width: size, height: size + 64 }}
       className={`relative grid grid-rows-[1fr_64px] shadow rounded-sm hover:cursor-pointer`}
     >
-      <div className="relative w-full h-full">
-        <Image src={product.featuredImage.url} alt={product.title} fill />
+      <div className="relative h-full w-full">
+        <IconButton
+          variant="filled"
+          onClick={() => alert("Item added to cart")}
+          className="w-8 h-8 bg-black rounded-full float-right mr-3 mt-3 z-10"
+        >
+          <IconShoppingCart className="w-5 text-white" />
+        </IconButton>
+        <Image
+          src={product.featuredImage.url}
+          alt={product.title}
+          width={size}
+          height={size}
+          className="absolute top-0 left-0"
+        />
       </div>
       <div className="w-full h-16  text-center">
         <Typography className="relative m-1 font-bold" variant="h6">
@@ -30,13 +43,6 @@ function ProductCard(props: ProductCardProps) {
         </Typography>
         <Typography variant="h6">{`${product.price.amount} ${product.price.currencyCode}`}</Typography>
       </div>
-      <IconButton
-        variant="filled"
-        onClick={() => alert("Item added to cart")}
-        className="w-8 h-8 bg-black rounded-full absolute right-3 top-3"
-      >
-        <IconShoppingCart className="w-5 text-white" />
-      </IconButton>
     </div>
   );
 }
