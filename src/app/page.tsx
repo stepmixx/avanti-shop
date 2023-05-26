@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
 import Link from "next/link";
 import Image from "next/image";
+import { IconChevronDown } from "@tabler/icons-react";
 
 export const runtime = "edge";
 
@@ -36,9 +37,18 @@ export default async function Home() {
             className="object-cover lg:object-contain"
           />
         </div>
+        <a
+          href="#featured"
+          className="absolute text-3xl text-white bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 text-background flex flex-col items-center can_hover:cursor-pointer no_hover:animate-pulse can_hover:animate-none can_hover:hover:-translate-y-2 transition ease-in-out duration-500"
+        >
+          <IconChevronDown />
+        </a>
       </div>
       <Suspense fallback={<FullPageLoader />}>
-        <div className="w-full flex flex-col items-center p-8 md:p-16">
+        <div
+          id="featured"
+          className="w-full flex flex-col items-center p-8 md:p-16"
+        >
           <Typography variant="h2" className="font-bold uppercase">
             {collection.title}
           </Typography>
