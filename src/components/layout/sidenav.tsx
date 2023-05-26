@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button, Drawer, IconButton } from "@/components/material-tailwind";
 import { IconX } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 interface SidenavProps {
   open: boolean;
@@ -14,6 +16,12 @@ interface SidenavProps {
 export function Sidenav(props: SidenavProps) {
   const { open, onClose, routes } = props;
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleRedirect = (path: string) => {
+    router.push(path);
+    onClose();
+  };
 
   return (
     <>
@@ -39,16 +47,15 @@ export function Sidenav(props: SidenavProps) {
               const isActive = pathname === path;
               return (
                 <li key={title}>
-                  <Link href={path}>
-                    <Button
-                      color="white"
-                      variant={isActive ? "gradient" : "text"}
-                      className="flex items-center px-4"
-                      fullWidth
-                    >
-                      <p className="normal-case text-lg font-normal">{title}</p>
-                    </Button>
-                  </Link>
+                  <Button
+                    onClick={() => handleRedirect(path)}
+                    color="white"
+                    variant={isActive ? "gradient" : "text"}
+                    className="flex items-center px-4"
+                    fullWidth
+                  >
+                    <p className="normal-case text-lg font-normal">{title}</p>
+                  </Button>
                 </li>
               );
             })}
