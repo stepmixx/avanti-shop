@@ -1,3 +1,4 @@
+"use client";
 import { IconError404 } from "@tabler/icons-react";
 import { Typography } from "@/components/material-tailwind";
 
