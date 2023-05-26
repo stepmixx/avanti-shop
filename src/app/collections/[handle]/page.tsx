@@ -17,8 +17,9 @@ export async function generateMetadata({
 }: {
   params: { handle: string };
 }) {
+  console.log(handle);
   const collection = (await CollectionService.getCollectionByHandle(
-    Array.isArray(handle) ? handle[0] : handle,
+    handle,
     1
   )) as any;
   return {
@@ -34,14 +35,14 @@ async function Collection({
   params: { handle: string };
   searchParams: { [key: string]: string };
 }) {
-  const [handle] = params.handle as any;
+  console.log(params);
+  const handle = params.handle as any;
   const newParams = new URLSearchParams(searchParams);
   const cursor = decodeURIComponent(newParams.get("cursor") as string);
   const collection = !newParams.has("cursor")
     ? ((await CollectionService.getCollectionByHandle(
         handle,
-        PAGE_SIZES.GRID,
-        null
+        PAGE_SIZES.GRID
       )) as any)
     : !newParams.has("direction")
     ? ((await CollectionService.getCollectionByHandle(
