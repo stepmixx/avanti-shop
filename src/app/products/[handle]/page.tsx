@@ -4,6 +4,8 @@ import { Typography } from "@/components/material-tailwind";
 import { Suspense } from "react";
 import Image from "next/image";
 
+export const runtime = "edge";
+
 export async function generateMetadata({
   params: { handle },
 }: {

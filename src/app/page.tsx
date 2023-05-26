@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import { FullPageLoader } from "@/components/circular-loader.component";
 import Link from "next/link";
 
+export const runtime = "edge";
+
 export const metadata = {
   title: "Take Home | AVANTI",
   description: "Take home assignment for Avanti",

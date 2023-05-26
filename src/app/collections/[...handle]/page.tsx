@@ -10,6 +10,8 @@ import { FullPageLoader } from "@/components/circular-loader.component";
 import Link from "next/link";
 import { createUrl } from "@/helpers/utils";
 
+export const runtime = "edge";
+
 export async function generateMetadata({
   params: { handle },
 }: {

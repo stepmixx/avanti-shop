@@ -11,6 +11,8 @@ import Link from "next/link";
 import ProductService from "@/services/product.service";
 import { capitalize, createUrl } from "@/helpers/utils";
 
+export const runtime = "edge";
+
 export async function generateMetadata({
   searchParams,
 }: {
