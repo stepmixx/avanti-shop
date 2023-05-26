@@ -1,11 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
-import path from "path";
 
 const baseURL = `http://localhost:${process.env.PORT || 3000}`;
 export default defineConfig({
-  testDir: path.join(__dirname, "e2e"),
+  testDir: "e2e",
   retries: 2,
-  outputDir: ".playwright",
   webServer: {
     command: "pnpm build && pnpm start",
     url: baseURL,
