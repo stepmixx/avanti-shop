@@ -51,7 +51,11 @@ export default function SearchDialog(props: SearchDialogProps) {
   }
 
   return (
-    <Dialog open={open} handler={onCancel} className="p-4 w-[min(500px,80vw)]">
+    <Dialog
+      open={open}
+      handler={onCancel}
+      className="p-4 w-[min(500px,85vw)] max-w-full min-w-0"
+    >
       <form
         onSubmit={onSubmit}
         className="relative m-0 flex items-center border border-gray-200 bg-transparent dark:border-gray-500 rounded-sm"
