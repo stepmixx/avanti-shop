@@ -38,6 +38,9 @@ export default function SearchDialog(props: SearchDialogProps) {
     const search = val.search as HTMLInputElement;
     const newParams = new URLSearchParams(searchParams.toString());
 
+    if (newParams.has("cursor")) newParams.delete("cursor");
+    if (newParams.has("direction")) newParams.delete("direction");
+
     if (search.value) {
       newParams.set("query", search.value);
     } else {
