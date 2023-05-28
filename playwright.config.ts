@@ -1,11 +1,12 @@
 import { defineConfig } from "@playwright/test";
 
-const baseURL = `http://127.0.0.1:3000`;
+const baseURL = `http://localhost:3000`;
 export default defineConfig({
   testDir: "e2e",
+  timeout: 120 * 1000,
   retries: 2,
   webServer: {
-    command: "pnpm dev", // has to be pnpm build && pnpm start for production.
+    command: "pnpm build && pnpm start", // has to be pnpm build && pnpm start for production.
     port: 3000,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
