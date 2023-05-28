@@ -6,7 +6,7 @@ export default defineConfig({
   retries: 2,
   webServer: {
     command: "pnpm dev", // has to be pnpm build && pnpm start for production.
-    url: baseURL,
+    port: 3000,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
   },
