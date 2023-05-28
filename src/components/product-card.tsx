@@ -14,6 +14,11 @@ function ProductCard(props: ProductCardProps) {
   const { product, size = 256, index } = props;
   const router = useRouter();
 
+  function addToCart(event: any) {
+    event.stopPropagation();
+    alert("Item added to cart");
+  }
+
   return (
     <div
       id={typeof index === "number" ? `product-${index}` : undefined}
@@ -22,13 +27,6 @@ function ProductCard(props: ProductCardProps) {
       className={`relative grid grid-rows-[1fr_64px] shadow rounded-sm hover:cursor-pointer`}
     >
       <div className="relative h-full w-full">
-        <IconButton
-          variant="filled"
-          onClick={() => alert("Item added to cart")}
-          className="w-8 h-8 bg-black rounded-full float-right mr-3 mt-3 z-10"
-        >
-          <IconShoppingCart className="w-5 text-white" />
-        </IconButton>
         <Image
           src={product.featuredImage.url}
           alt={product.title}
@@ -36,6 +34,13 @@ function ProductCard(props: ProductCardProps) {
           height={size}
           className="absolute top-0 left-0"
         />
+        <IconButton
+          variant="filled"
+          onClick={addToCart}
+          className="w-8 h-8 bg-black rounded-full float-right mr-3 mt-3 z-10"
+        >
+          <IconShoppingCart className="w-5 text-white" />
+        </IconButton>
       </div>
       <div className="w-full h-16  text-center">
         <Typography className="relative m-1 font-bold" variant="h6">
