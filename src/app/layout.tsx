@@ -59,7 +59,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} font-sans pt-16 bg-white`}>
+      <body
+        className={`${montserrat.variable} font-sans pt-16 bg-white text-black`}
+      >
         <Navbar />
         <main className="flex min-h-screen w-full">{children}</main>
         <Footer />
