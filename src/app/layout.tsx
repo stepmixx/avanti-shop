@@ -29,7 +29,6 @@ export function metadata() {
     colorScheme: "dark",
     creator: "Stephan",
     manifest: "/manifest.json",
-    themeColor: "#FFFFFF",
     metadataBase: new URL("https://avanti-take-home.vercel.app"),
     appleWebApp: {
       capable: true,
@@ -60,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} font-sans pt-16`}>
+      <body className={`${montserrat.variable} font-sans pt-16 bg-white`}>
         <Navbar />
         <main className="flex min-h-screen w-full">{children}</main>
         <Footer />
